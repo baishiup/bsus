@@ -19,13 +19,15 @@ class ArticleController extends Controller {
     });
   }
   async getList() {
-    const { pageSize = 10, page = 1 } = this.ctx.request.query;
+    const { pageSize = 100, page = 1, category_id } = this.ctx.request.query;
+    let req = { state: PublishState.published };
+    if (category_id) {
+      req.category_id = category_id;
+    }
     return this.ctx.model.Article.findAndCountAll({
-      where: {
-        state: PublishState.published
-      },
+      where: req,
       include: [{ model: this.ctx.model.Category }],
-      attributes: { exclude: ["category_id"] },
+      attributes: { exclude: ["category_id", "content", "code"] },
       order: [["created_at", "desc"]],
       offset: (Number(page) - 1) * pageSize,
       limit: Number(pageSize)
@@ -58,7 +60,7 @@ class ArticleController extends Controller {
   }
   async delete() {
     const { id } = this.ctx.params;
-    let newArt = await this.ctx.model.Article.update({ state: PublishState.deleted }, { where: { id } });
+    await this.ctx.model.Article.update({ state: PublishState.deleted }, { where: { id } });
     HttpSuccess.call(this, {
       message: "删除成功"
     });
@@ -70,16 +72,17 @@ class ArticleController extends Controller {
   }
   async update() {
     const { id } = this.ctx.params;
-    const { title, description, thumb, content, keywords, state, category_id, tag_ids } = this.ctx.request.body;
+    const { title, description, thumb, code, content, keywords, state, category_id, tags } = this.ctx.request.body;
     const data = {
       title,
       description,
       thumb,
+      code,
       content,
       keywords,
       state,
       category_id,
-      tag_ids
+      tags
     };
     return this.ctx.model.Article.update(data, { where: { id } }).then(article => {
       HttpSuccess.call(this, {

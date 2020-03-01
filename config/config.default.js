@@ -37,7 +37,12 @@ module.exports = appInfo => {
   };
   // add your user config here
   const userConfig = {
-    myAppName: "Baishiup site"
+    myAppName: "Baishiup site",
+    qiniu: {
+      ak: "9G9jn3S47ZS1nMdYDvdqZSqbhEVIXI7F7Hv44eoz",
+      sk: "nbCAx_Hg5GRSzs11jBGodU4Ihj9gD6VFSNyluwc3",
+      bucket: "baishiup"
+    }
   };
 
   return {

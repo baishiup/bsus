@@ -11,7 +11,13 @@ class CategoryController extends Controller {
       where: {},
       offset: (Number(page) - 1) * pageSize,
       limit: Number(pageSize),
-      order: [["created_at", "desc"]]
+      order: [["created_at", "desc"]],
+      include: [
+        {
+          model: this.ctx.model.Article,
+          attributes: { exclude: ["category_id", "content", "code"] }
+        }
+      ]
     }).then(list => {
       HttpSuccess.call(this, {
         attribute: {

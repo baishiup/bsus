@@ -21,4 +21,6 @@ module.exports = app => {
 
   router.get("/login", controller.auth.dologin);
   router.get("/register", controller.auth.register);
+
+  router.get("/qiniutoken", controller.qiniu.getToken);
 };
