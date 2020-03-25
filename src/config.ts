@@ -3,7 +3,7 @@ export const MYSQL = {
   port: 3306,
   username: 'root',
   password: 'Admin.123',
-  database: 'newbsus',
+  database: 'bsus',
 };
 
 export const QINIU = {

@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { Repository, UpdateResult } from 'typeorm';
+import { Repository } from 'typeorm';
 import { ArticleEntity } from './article.entity';
 import { HttpResponse } from 'src/decorators/httpResponse';
 import { TagEntity } from '../tag/tag.entity';
