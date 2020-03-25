@@ -5,25 +5,20 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-  OneToOne,
   JoinColumn,
   ManyToMany,
   JoinTable,
 } from 'typeorm';
 import { CategoryEntity } from '../category/category.entity';
 import { TagEntity } from '../tag/tag.entity';
-
-enum State {
-  PUBLISH = '1',
-  DRAFT = '2',
-}
+import { PublishState } from 'src/interfaces';
 
 @Entity({
   name: 'article',
 })
 export class ArticleEntity {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Column({
     unique: true,
@@ -31,38 +26,39 @@ export class ArticleEntity {
   title: string;
 
   @Column({
-    default: '',
+    nullable: true,
   })
   description: string;
 
   @Column({
-    default: '',
+    nullable: true,
   })
   thumb: string;
 
   @Column({
     comment: 'markdown代码',
-    default: '',
+    type: 'text',
+    nullable: true,
   })
   code: string;
 
   @Column({
     comment: '通过markdown转换的html代码',
-    default: '',
+    type: 'text',
+    nullable: true,
   })
   html: string;
 
   @Column({
-    default: '',
+    nullable: true,
   })
   keywords: string;
 
   @Column({
     type: 'enum',
-    enum: State,
-    default: State.PUBLISH,
+    enum: PublishState,
   })
-  state: State;
+  state: PublishState;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -73,6 +69,9 @@ export class ArticleEntity {
   @ManyToOne(
     type => CategoryEntity,
     category => category.articles,
+    {
+      nullable: true,
+    },
   )
   @JoinColumn({ name: 'categoryId' })
   category: CategoryEntity;

@@ -1,5 +1,5 @@
 {
-  "name": "bsus-ts",
+  "name": "bsus",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -26,7 +26,10 @@
     "@nestjs/core": "^7.0.0",
     "@nestjs/platform-express": "^7.0.0",
     "@types/hapi__joi": "^16.0.12",
+    "highlight.js": "^9.18.1",
+    "marked": "^0.8.2",
     "mysql": "^2.18.1",
+    "qiniu": "^7.3.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.4",

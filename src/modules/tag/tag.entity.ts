@@ -5,9 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToMany,
-  JoinTable,
 } from 'typeorm';
-import { type } from 'os';
 import { ArticleEntity } from '../article/article.entity';
 
 @Entity({
@@ -15,7 +13,7 @@ import { ArticleEntity } from '../article/article.entity';
 })
 export class TagEntity {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Column({
     unique: true,

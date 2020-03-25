@@ -13,7 +13,7 @@ import { ArticleEntity } from '../article/article.entity';
 })
 export class CategoryEntity {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Column({
     unique: true,

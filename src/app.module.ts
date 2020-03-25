@@ -5,10 +5,11 @@ import { APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core';
 import { HttpInterceptor } from './interceptors/http.interceptor';
 import { GlobalExceptionFilter } from './filters/globalException.filter';
 import { TagModule } from './modules/tag/tag.module';
+import { QiniuController } from './modules/qiniu/qiniu.controller';
 
 @Module({
   imports: [CategoryModule, ArticleModule, TagModule],
-  controllers: [],
+  controllers: [QiniuController],
   providers: [
     {
       provide: APP_FILTER,

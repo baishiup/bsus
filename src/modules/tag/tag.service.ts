@@ -6,12 +6,14 @@ import { HttpResponse } from 'src/decorators/httpResponse';
 @Injectable()
 export class TagService {
   constructor(
-    @Inject('TAG_REPO') private readonly Repo: Repository<TagEntity>,
+    @Inject(__dirname) private readonly Repo: Repository<TagEntity>,
   ) {}
 
-  async getList() {
+  async getList({ pageSize = 1000, current = 1 }): Promise<Array<TagEntity>> {
     return await this.Repo.createQueryBuilder('tag')
       .leftJoinAndSelect('tag.articles', 'articles')
+      .skip((current - 1) * pageSize) // 跳过条数
+      .take(pageSize) // pageSize
       .getMany();
   }
 
