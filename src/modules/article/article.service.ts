@@ -28,6 +28,8 @@ export class ArticleService {
     state,
     desc,
   }): Promise<ArticleEntity[]> {
+    console.log(process.argv);
+
     const query = this.Repo.createQueryBuilder('article');
     const descKey = desc ? `article.${desc}` : 'article.updatedAt';
     if (state) {
