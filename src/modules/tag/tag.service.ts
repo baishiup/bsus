@@ -17,23 +17,29 @@ export class TagService {
       .getMany();
   }
 
-  async create(name) {
+  async getDetail(id) {
+    return await this.Repo.findOne(id);
+  }
+
+  async create(name, thumb = '') {
     return this.Repo.find({ name }).then(async existed => {
       if (existed.length) {
         return HttpResponse.error('标签已存在');
       }
       const tag = new TagEntity();
       tag.name = name;
+      tag.thumb = thumb;
       return await this.Repo.save(tag);
     });
   }
 
-  async update(id, name) {
+  async update(id, name = '', thumb = '') {
     const tag = await this.Repo.findOne(id);
     if (tag === undefined) {
       return HttpResponse.error('标签不存在');
     }
     tag.name = name;
+    tag.thumb = thumb;
     return await this.Repo.update(id, tag);
   }
 

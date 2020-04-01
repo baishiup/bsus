@@ -20,6 +20,9 @@ export class TagEntity {
   })
   name: string;
 
+  @Column()
+  thumb: string;
+
   @CreateDateColumn()
   createdAt: Date;
 

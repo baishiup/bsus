@@ -30,6 +30,12 @@ export class CategoryController {
     return this.service.getList(query);
   }
 
+  // 详细
+  @Get(':id')
+  getDetail(@Param() param) {
+    return this.service.getDetail(param.id);
+  }
+
   // 新增
   @Post()
   create(

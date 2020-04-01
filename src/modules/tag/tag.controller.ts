@@ -21,21 +21,41 @@ export class TagController {
     return this.service.getList(query);
   }
 
+  // 详细
+  @Get(':id')
+  getDetail(@Param() param) {
+    return this.service.getDetail(param.id);
+  }
+
   @Post()
   create(
-    @Body(new JoiValid(Joi.object().keys({ name: Joi.required().not('') })))
+    @Body(
+      new JoiValid(
+        Joi.object().keys({
+          name: Joi.required().not(''),
+          thumb: Joi.string().allow(''),
+        }),
+      ),
+    )
     body,
   ) {
-    return this.service.create(body.name);
+    return this.service.create(body.name, body.thumb);
   }
 
   @Put(':id')
   update(
     @Param(new JoiValid(Joi.object().keys({ id: Joi.required() }))) param,
-    @Body(new JoiValid(Joi.object().keys({ name: Joi.required().not('') })))
+    @Body(
+      new JoiValid(
+        Joi.object().keys({
+          name: Joi.required().not(''),
+          thumb: Joi.string().allow(''),
+        }),
+      ),
+    )
     body,
   ) {
-    return this.service.update(param.id, body.name);
+    return this.service.update(param.id, body.name, body.thumb);
   }
 
   @Delete(':id')

@@ -17,6 +17,10 @@ export class CategoryService {
       .getMany();
   }
 
+  async getDetail(id) {
+    return await this.Repo.findOne(id);
+  }
+
   async create(name, thumb = ''): Promise<HttpResponse | CategoryEntity> {
     return this.Repo.find({ name }).then(async existed => {
       if (existed.length) {
