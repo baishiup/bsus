@@ -18,7 +18,6 @@ export class JoiValid implements PipeTransform {
     return value;
   }
 }
-
 const baseSchema = Joi.object().keys();
 export function genValid(selfRules) {
   return new JoiValid(baseSchema.keys(selfRules(Joi)));

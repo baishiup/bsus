@@ -14,7 +14,7 @@ export class GithubService {
     const { data } = await Axios.get(
       'https://api.github.com/users/baishiup/repos',
     );
-    console.log('getReposFromGithub---', data);
+    console.log('getReposFromGithub---');
     if (!data) {
       return;
     }
