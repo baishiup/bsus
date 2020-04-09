@@ -10,6 +10,11 @@ export class GithubService {
   constructor(
     @Inject(__dirname) private readonly Repo: Repository<GithubEntity>,
   ) {}
+  async getRepos() {
+    const repos = await this.Repo.findOne({ name: 'repos' });
+    return HttpResponse.success().setList(repos ? JSON.parse(repos.data) : []);
+  }
+
   async getReposFromGithub() {
     const { data } = await Axios.get(
       'https://api.github.com/users/baishiup/repos',
@@ -33,10 +38,6 @@ export class GithubService {
         })),
     );
     return await this.Repo.save(newRecord);
-  }
-  async getRepos() {
-    const repos = await this.Repo.findOne({ name: 'repos' });
-    return HttpResponse.success().setList(repos ? JSON.parse(repos.data) : []);
   }
 
   @Cron(CronExpression.EVERY_30_MINUTES)

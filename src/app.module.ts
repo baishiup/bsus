@@ -12,6 +12,7 @@ import { TagModule } from './modules/tag/tag.module';
 import { QiniuController } from './modules/qiniu/qiniu.controller';
 import { GithubModule } from './modules/github/github.module';
 import { SettingModule } from './modules/setting/setting.module';
+import { QQmusicModule } from './modules/qqmusic/qqmusic.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { SettingModule } from './modules/setting/setting.module';
     TagModule,
     GithubModule,
     SettingModule,
+    QQmusicModule,
   ],
   controllers: [QiniuController],
   providers: [
