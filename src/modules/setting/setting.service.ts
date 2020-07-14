@@ -23,13 +23,11 @@ export class SettingService {
   }
 
   async batchSetSetting(data: Record<string, string>) {
-    console.log(data);
     const insertValues = Object.keys(data)
       .map(x => `('${x}','${data[x]}')`)
       .join(',');
     const query = `INSERT INTO setting (\`name\`,\`data\`) VALUES ${insertValues} 
     ON DUPLICATE KEY UPDATE \`name\` = VALUES(\`name\`),\`data\` = VALUES(\`data\`)`;
-    console.log(query);
     return await this.Repo.query(query);
   }
 }
