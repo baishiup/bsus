@@ -12,6 +12,7 @@ import { TagModule } from './modules/tag/tag.module';
 import { QiniuController } from './modules/qiniu/qiniu.controller';
 import { GithubModule } from './modules/github/github.module';
 import { SettingModule } from './modules/setting/setting.module';
+import { MyReportModule } from './modules/myReport/myReport.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { SettingModule } from './modules/setting/setting.module';
     TagModule,
     GithubModule,
     SettingModule,
+    MyReportModule,
   ],
   controllers: [QiniuController],
   providers: [
